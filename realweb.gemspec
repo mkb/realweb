@@ -10,11 +10,11 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/engineyard/realweb"
 
   s.add_runtime_dependency "rack", '>=1.1.0'
+  s.add_runtime_dependency 'excon'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~>2.0'
   s.add_development_dependency 'thin'
-  s.add_development_dependency 'excon'
 
   s.require_path = 'lib'
   s.files = Dir['{lib}/**/*']
