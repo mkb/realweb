@@ -1,3 +1,5 @@
+require 'excon'
+
 module RealWeb
   class Server
     attr_reader :host, :rack_server
