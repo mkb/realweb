@@ -86,11 +86,13 @@ module RealWeb
     end
 
     def wait_for_server
+      puts "waiting for server on port #{port}"
       excon = Excon.new("http://#{host}:#{port}")
       20.times do
         begin
           excon.get(:path => '/')
           return
+          puts 'server running!'
         rescue OpenURI::HTTPError
           return
         rescue Excon::Errors::SocketError
