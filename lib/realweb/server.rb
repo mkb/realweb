@@ -23,6 +23,7 @@ module RealWeb
       @port_range = options.delete(:port_range) || DEFAULT_PORT_RANGE
       @logger     = options.delete(:logger)     || DEFAULT_LOGGER
       @host       = options.delete(:host)       || DEFAULT_HOST
+      @debug      = options.delete(:debug)      || false
 
       @pre_spawn_callback = options.delete(:pre_spawn_callback)
       @rack_options = options
@@ -86,13 +87,12 @@ module RealWeb
     end
 
     def wait_for_server
-      puts "waiting for server on port #{port}"
+      puts "waiting for server on port #{port}" if @debug
       excon = Excon.new("http://#{host}:#{port}")
       20.times do
         begin
           excon.get(:path => '/')
           return
-          puts 'server running!'
         rescue OpenURI::HTTPError
           return
         rescue Excon::Errors::SocketError
